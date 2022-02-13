@@ -16,7 +16,7 @@
 <main class="form-signin mx-auto mt-auth">
   <form action="/login" method="POST" class="w-75 d-flex flex-column mx-auto">
       @csrf
-    <h1 class="h3 mb-3 fw-normal text-center">Авторизацияz</h1>
+    <h1 class="h3 mb-3 fw-normal text-center">Авторизация</h1>
 
     <div class="form-floating mb-2 mt-1">
       <input type="tel" name="tel" data-tel-input class="form-control" id="floatingInput" placeholder="name@example.com">
