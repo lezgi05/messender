@@ -79,11 +79,11 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
-    public function personal() {
+    public function profile() {
         $user_details = UserDetails::where('user_id', '=', auth()->user()->id)->first();
         $user_details_count = UserDetails::where('user_id', '=', auth()->user()->id)->count();
         $my_friends_count = Friends::where('add_friends_id', '=', auth()->user()->id)->orWhere('app_friends_id', '=', auth()->user()->id)->count();
-        return view('personal', ['user_details' => $user_details, 'user_details_count' => $user_details_count, 'my_friends_count' => $my_friends_count]);
+        return view('profile', ['user_details' => $user_details, 'user_details_count' => $user_details_count, 'my_friends_count' => $my_friends_count]);
     }
 
     public function exit_personal() {
@@ -122,7 +122,7 @@ class AuthController extends Controller
             $user_details->gender = $data->input('gender');
             $user_details->save();
         }
-        return redirect()->route('personal');
+        return redirect()->route('profile');
     }
 
     public function avatar_exit_personal($id, Request $data) {
@@ -156,6 +156,6 @@ class AuthController extends Controller
             $user_details->avatar=$filename;
             $user_details->save();
          }
-         return redirect()->route('personal');
+         return redirect()->route('profile');
     }
 }

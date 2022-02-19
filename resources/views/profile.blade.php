@@ -2,7 +2,7 @@
 @section('main')
 <body>        
     <div class="container-fluid px-0">
-        <div class="d-flex flex-column fixed-top pt-4 pb-5 bg-muted px-3" style="z-index: 100;">
+        <div class="d-flex flex-column pt-4 pb-5 bg-muted px-3">
             <div class="d-flex flex-column">
                 <div class="d-flex">
                     @if($user_details_count == 0)
@@ -34,13 +34,19 @@
                 <button class="btn btn-none text-dark-blue"><i class="bi bi-chevron-down me-2"></i>Подробная информация</button>
             </div>
         </div>
-        <div class="h-profile bg-light-blue w-100">
+        <div class="profile h-my-profile bg-light-blue w-100">
+            <div class="d-flex flex-column text-center pt-5 text-dark-blue">
+                <i class="bi bi-pencil-square fs-icon"></i>
+                <h4>Создайте первую запись</h4>
+                <span class="w-75 mx-auto">Поделитесь с друзьями чем-нибудь интересным</span>
+                <a href="#" class="btn btn-dark-blue mt-2 w-50 mx-auto">Создать запись</a>
+            </div>
         </div>
     </div>
 
     <script>
-        personal.classList.remove('text-muted')
-        personal.classList.add('text-dark-blue')
+        profile.classList.remove('text-muted')
+        profile.classList.add('text-dark-blue')
     </script>    
 </body>
 </html>

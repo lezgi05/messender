@@ -23,7 +23,7 @@
         <div class="bg-light-blue w-100 mes_custom">
     
             <div class="correspondence">
-                <div class="row row-cols-1 h-100">                
+                <div class="row row-cols-1 h-100"> 
 
                     <script>
                         function settest(){
@@ -72,7 +72,7 @@
                     <input type="text" name="text" id="text" class="input-mess py-2 px-2 w-75">
                     <button id="send_mes" class="btn btn-bone send-mess d-flex bg-muted me-auto pe-3">
                         <i class="bi bi-send-fill text-mess position-send fs-5"></i>
-                    </button>
+                    </button>   
                 </div>
             </form>
 

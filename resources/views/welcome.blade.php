@@ -15,44 +15,61 @@
         </div>
     @else
         <div class="row row-cols-1">
-            @foreach($dialog as $all)
-                @foreach($users as $user)
-                    @if($user->id == $all->user_2 || $user->id == $all->user_1)
-                        @if($user->id != auth()->user()->id)
-                                        <a href="/chat/{{$user->id}}" class="col d-flex mt-4 text-decoration-none">
-                                            @if($user_details->where('user_id', $user->id)->count() != 0)
-                                                <img class="chats-avatar rounded-pill" src="/storage/avatar/{{$user->id}}/{{$users_detailed = $user_details->where('user_id', $user->id)->first()->avatar}}" alt="...">
-                                            @else
-                                                <img class="chats-avatar rounded-pill" src="https://static.tildacdn.com/tild6361-3034-4333-b833-353964363837/pngwingcom_2.png" alt="...">
-                                            @endif
-                                            <div class="d-flex flex-column w-100">
-                                                <div class="d-flex ms-online">
-                                                    <div class="d-flex flex-column w-name">
-                                                        @if($user->name == '')
-                                                            <span class="text-dark-blue fs-name me-auto">{{$user->tel}}</span>
-                                                        @else
-                                                            <span class="text-dark-blue fs-name me-auto">{{$user->surname}} {{$user->name}}</span>
-                                                        @endif  
-                                                        @if($message->where('location', $all->id)->latest()->first()->sender == auth()->user()->id)       
-                                                            <div class="d-flex">
-                                                                <span class="small me-1 text-muted opacity-75">Вы:</span><span class="text-muted small">{{$message->where('location', $all->id)->latest()->first()->text}} {{$message->where('location', $all->id)->latest()->first()->id}}</span>
-                                                            </div>
-                                                        @else
-                                                            <span class="text-muted small">{{$message->where('location', $all->id)->latest()->first()->text}}</span>
-                                                        @endif
-                                                    </div>
-                                                    <div class="d-flex flex-column ms-auto w-time">
-                                                        <span class="text-muted small mx-auto">
-                                                            @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 10, 9) <= $date)
-                                                                1м
+            @foreach($message->orderBy('id', 'desc')->get() as $mess)
+                @foreach($dialog as $all)
+                    @foreach($users as $user)
+                        @if($user->id == $all->user_2 || $user->id == $all->user_1)
+                            @if($user->id != auth()->user()->id)  
+                                @if($mess->id == $message->where('location', $all->id)->latest()->first()->id)
+                                    <a href="/chat/{{$user->id}}" class="col d-flex mt-4 text-decoration-none">
+                                        @if($user_details->where('user_id', $user->id)->count() != 0)
+                                            <img class="chats-avatar rounded-pill" src="/storage/avatar/{{$user->id}}/{{$users_detailed = $user_details->where('user_id', $user->id)->first()->avatar}}" alt="...">
+                                        @else
+                                            <img class="chats-avatar rounded-pill" src="https://static.tildacdn.com/tild6361-3034-4333-b833-353964363837/pngwingcom_2.png" alt="...">
+                                        @endif
+                                        <div class="d-flex flex-column w-100">
+                                            <div class="d-flex ms-online">
+                                                <div class="d-flex flex-column w-name">
+                                                    @if($user->name == '')
+                                                        <span class="text-dark-blue fs-name me-auto">{{$user->tel}}</span>
+                                                    @else
+                                                        <span class="text-dark-blue fs-name me-auto">{{$user->surname}} {{$user->name}}</span>
+                                                    @endif  
+                                                    @if($message->where('location', $all->id)->latest()->first()->sender == auth()->user()->id)       
+                                                        <div class="d-flex">
+                                                            <span class="small me-1 text-muted opacity-75">Вы:</span><span class="text-muted small">{{$message->where('location', $all->id)->latest()->first()->text}}</span>
+                                                        </div>
+                                                    @else
+                                                        <span class="text-muted small">{{$message->where('location', $all->id)->latest()->first()->text}}</span>
+                                                    @endif
+                                                </div>
+                                                <div class="d-flex flex-column ms-auto w-time">
+                                                    <span class="text-muted small mx-auto">
+                                                        @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 7) == date('Y-m'))
+                                                            @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 10) == date('Y-m-d'))
+                                                                @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 10, 3) == date('H'))
+                                                                    @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 14, 2) == date('i'))
+                                                                    @else
+                                                                        {{date('i')-substr($message->where('location', $all->id)->latest()->first()->created_at, 14, 2)}} м
+                                                                    @endif
+                                                                @else
+                                                                    {{date('H')-substr($message->where('location', $all->id)->latest()->first()->created_at, 10, 3)}} ч
+                                                                @endif
+                                                            @else
+                                                                {{date('d')-substr($message->where('location', $all->id)->latest()->first()->created_at, 8, 2)}} д
                                                             @endif
-                                                        </span>
-                                                    </div>
+                                                        @else
+                                                            {{date('m')-substr($message->where('location', $all->id)->latest()->first()->created_at, 5, 2)}}
+                                                        @endif
+                                                    </span>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </div>
+                                    </a>
+                                @endif
+                            @endif
                         @endif
-                    @endif
+                    @endforeach
                 @endforeach
             @endforeach
         </div>

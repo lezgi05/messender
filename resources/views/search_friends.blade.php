@@ -12,17 +12,23 @@
                 @foreach($users as $all)
                     @if($all->id != auth()->user()->id)
                         <div class="col d-flex mt-3 pe-0">
-                            @if($user_details->where('user_id', $all->id)->count() != 0)
-                                <img class="chats-avatar rounded-pill" src="/storage/avatar/{{$all->id}}/{{$user = $user_details->where('user_id', $all->id)->first()->avatar}}" alt="...">
-                            @else
-                                <img class="chats-avatar rounded-pill" src="https://static.tildacdn.com/tild6361-3034-4333-b833-353964363837/pngwingcom_2.png" alt="...">
-                            @endif
-                            @if($all->name == '')
-                                <span class="text-dark-blue fs-name ms-3 mt-2">{{$all->tel}}</span>
-                            @else
-                                <span class="text-dark-blue fs-name ms-3 mt-2">{{$all->surname}} {{$all->name}}</span>
-                            @endif
+                            <a href="/other_profile/{{$all->id}}" class="text-decoration-none w-100">
+                                @if($user_details->where('user_id', $all->id)->count() != 0)
+                                    <img class="chats-avatar rounded-pill" src="/storage/avatar/{{$all->id}}/{{$user = $user_details->where('user_id', $all->id)->first()->avatar}}" alt="...">
+                                @else
+                                    <img class="chats-avatar rounded-pill" src="https://static.tildacdn.com/tild6361-3034-4333-b833-353964363837/pngwingcom_2.png" alt="...">
+                                @endif
+                                @if($all->name == '')
+                                    <span class="text-dark-blue fs-name ms-3 mt-2">{{$all->tel}}</span>
+                                @else
+                                    <span class="text-dark-blue fs-name ms-3 mt-2">{{$all->surname}} {{$all->name}}</span>
+                                @endif
+                            </a>
                             @if($f->where([['app_friends_id', $all->id],['add_friends_id', auth()->user()->id]])->first())
+                                <div class="d-flex my-auto ms-auto">
+                                    <a href="/chat/{{$all->id}}"><i class="bi bi-chat-right-text text-dark-blue fs-5 me-3"></i></a>
+                                </div>
+                            @elseif($f->where([['app_friends_id', auth()->user()->id],['add_friends_id', $all->id]])->first())
                                 <div class="d-flex my-auto ms-auto">
                                     <a href="/chat/{{$all->id}}"><i class="bi bi-chat-right-text text-dark-blue fs-5 me-3"></i></a>
                                 </div>

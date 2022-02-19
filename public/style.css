@@ -2,6 +2,10 @@
     font-weight: 700;
 }
 
+.fw-normal {
+    font-weight: 600;
+}
+
 .text-dark-blue {
     color: #012970;
 }
@@ -111,14 +115,20 @@
     scrollbar-width: none;
 }
 
-.h-profile {
-    height: 90vh;
+.profile {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    position: fixed;
-    top: 175px;
+    position: relative;
+    bottom: 50px;
     z-index: 150;
-    background-color: white;
+}
+
+.h-my-profile {
+    height: 90vh;
+}
+
+.h-other-profile {
+    height: 55vh;
 }
 
 .bg-muted {
@@ -302,3 +312,29 @@
 .bg-dark-blue {
     background: #88a0ce;
 }
+
+.fs-icon {
+    font-size: 50px;
+}
+
+.btn-dark-blue {
+    background: #88a0ce;
+    color: white;
+    border-radius: 10px;
+}
+
+.btn-dark-blue:hover {
+    color: white;
+}
+
+.position_delete_friends {
+    position: absolute;
+    z-index: 1000;
+    right: 20px;
+    top: 142px;
+}
+
+.delete_friends {
+    border-radius: 10px;
+}
+

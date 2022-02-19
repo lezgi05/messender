@@ -9,10 +9,13 @@ use App\Models\Dialog;
 use App\Models\Message;
 use App\Models\Friends;
 
+use Illuminate\Support\Facades\Route;
+
 class MainController extends Controller
 {
     public function welcome() {
-        $dialog = Dialog::where('user_1', '=', auth()->user()->id)->orWhere('user_2', '=', auth()->user()->id)->latest()->get();
+        $mess = new Message();
+        $dialog = Dialog::where('user_1', '=', auth()->user()->id)->orWhere('user_2', '=', auth()->user()->id)->orderBy('id', 'desc')->get();
         $dialog_count = Dialog::where('user_1', '=', auth()->user()->id)->orWhere('user_2', '=', auth()->user()->id)->count();
         $users = new User();
         $user_details = new UserDetails();
@@ -133,10 +136,34 @@ class MainController extends Controller
         $friends->add_friends_id = auth()->user()->id;
         $friends->app_friends_id = $id;
         $friends->save();
+        
         return redirect()->route('search_friends');
+    }
+
+    public function new_friends_profile($id) {
+        $friends = new Friends();
+        $friends->add_friends_id = auth()->user()->id;
+        $friends->app_friends_id = $id;
+        $friends->save();
+        
+        return redirect()->route('other_profile', $id);
     }
 
     public function settings() {
         return view('settings');
+    }
+
+    public function other_profile($id) {
+        $user = User::find($id);
+        $user_details = UserDetails::where('user_id', '=', $id)->first();
+        $user_details_count = UserDetails::where('user_id', '=', $id)->count();
+        $my_friends_count = Friends::where('add_friends_id', '=', $id)->orWhere('app_friends_id', '=', $id)->count();
+        $my_friends = Friends::where([['add_friends_id', '=', $id], ['app_friends_id', '=', auth()->user()->id]])->orWhere([['app_friends_id', '=', $id], ['add_friends_id', '=', auth()->user()->id]])->count();
+        return view('other_profile', ['user' => $user, 'user_details' => $user_details, 'user_details_count' => $user_details_count, 'my_friends_count' => $my_friends_count, 'my_friends' => $my_friends]);
+    }
+
+    public function delete_friends($id) {
+        Friends::where([['add_friends_id', '=', $id], ['app_friends_id', '=', auth()->user()->id]])->orWhere([['app_friends_id', '=', $id], ['add_friends_id', '=', auth()->user()->id]])->delete();
+        return redirect()->route('other_profile', $id);
     }
 }

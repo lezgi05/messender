@@ -34,7 +34,7 @@
       @error('password_confirmation')<div class="text-danger">{{$message}}</div>@enderror
     </div>
 
-    <button class="w-100 btn btn-lg bg-mess1 text-white" type="submit">Войти</button>
+    <button class="w-100 btn btn-lg bg-mess1 text-white" type="submit">Зарегистрироваться</button>
   </form>
   <a href="/" class="d-block text-center mt-2 text-decoration-none text-dark-blue">Уже зарегистрированы? Войдите на сайт</a>
 </main>

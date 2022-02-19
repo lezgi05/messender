@@ -17,7 +17,7 @@
     <header class="d-flex header-bottom justify-content-evenly fixed-bottom bg-white py-4">
         <a href="/home" class="px-2"><i id="home" class="bi bi-chat-left text-muted fs-5"></i></a>
         <a href="/friends" class="px-2"><i id="friends" class="bi bi-people text-muted fs-5"></i></a>
-        <a href="/personal" class="px-2"><i id="personal" class="bi bi-person text-muted fs-5"></i></a>
+        <a href="/profile" class="px-2"><i id="profile" class="bi bi-person text-muted fs-5"></i></a>
     </header>
 
     @yield('main')    
