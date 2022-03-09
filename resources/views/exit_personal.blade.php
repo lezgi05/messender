@@ -1,17 +1,13 @@
 @extends('layout')
 @section('main')
 <div class="container mb-header">
-    <h1 class="me-auto fw-custom text-dark-blue mt-1">Редактировать данные</h1>
+    <div class="d-flex mt-2 mb-2">
+        <a href="/home" class="me-2"><i class="bi bi-arrow-left text-dark-blue fs-4"></i></a>
+        <h1 class="mb-0 text-dark-blue" style="font-weight: 600;">Редактировать данные</h1>
+    </div>
     <div class="d-flex flex-column">
-        <form method="POST" enctype="multipart/form-data" action="/avatar_exit_personal/@if($user_details_count == 0){{auth()->user()->id}}@else{{$user_details->user_id}}@endif">
-        @csrf
-            <label class="text-muted mb-1">Сменить аватарку</label>
-            <input type="file" name="avatar" class="form-control mb-2">
-            <button class="btn btn-mess w-100">Сохранить</button>
-        </form>
         <form action="/main_exit_personal/@if($user_details_count == 0){{auth()->user()->id}}@else{{$user_details->user_id}}@endif" method="POST">
         @csrf
-            <h3 class="mt-2">Основное</h3>
             <div class="d-flex flex-column">
                 <label class="text-muted mb-1">Имя</label> 
                 <input type="text" name="name" value="{{auth()->user()->name}}" class="form-control mb-2">
@@ -163,6 +159,10 @@
                         </select>
                     </div>
                 </div>
+                <div class="d-flex flex-column">
+                    <label class="text-muted mb-1">Город</label> 
+                    <input type="text" name="city" @if($user_details_count == 1) @if($user_details->city != '') value="{{$user_details->city}}" @endif @endif class="form-control mb-2">
+                </div>
                 <div class="d-flex flex-column mb-3">
                     <span class="text-muted mb-1">Пол</span>
                     <div class="d-flex">
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                 </div>
-            <button class="btn btn-mess w-100">Сохранить</button>
+            <button class="btn btn-dark-blue w-100">Сохранить</button>
         </form>
     </div>
 </div>

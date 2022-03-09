@@ -14,6 +14,14 @@
     color: #012970;
 }
 
+.text-light-blue {
+    color: #012a708f;
+}
+
+.text-light-blue:hover {
+    color: #012a708c;
+}
+
 .chats-avatar {
     width: 50px;
     height: 50px;
@@ -32,21 +40,21 @@
 }
 
 .ms-online {
-    margin-left: 20px;
+    margin-left: 19px;
 }
 
 .online {
-    width: 20px;
-    height: 20px;
-    background-color: white;
+    width: 15px;
+    height: 15px;
     position: relative;
-    right: 13px;
+    right: 12px;
     top: 32px;
-    padding-top: 5px;
-    padding-left: 5px;
+    padding-top: 3px;
+    padding-left: 3px;
 }
 
 .online-item {
+    display: block;
     width: 10px;
     height: 10px;
     background-color: rgb(17, 189, 31);
@@ -75,7 +83,7 @@
 .search-custom {
     width: 100%;
     border: none;
-    background-color: #d1dce479;
+    background: #e0e4f5;
     border-radius: 10px;
     outline: none;
 }
@@ -94,6 +102,9 @@
     top: 70px;
     bottom: 55px;
     width: 100%; 
+    overflow: hidden;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
 }
 
 .mes_correspondence {
@@ -104,7 +115,7 @@
 
 .main-position {
     position: fixed;
-    bottom: 75px;
+    bottom: 62px;
     top: 45px;
 }
 
@@ -124,7 +135,7 @@
 }
 
 .h-my-profile {
-    height: 90vh;
+    height: 70vh;
 }
 
 .h-other-profile {
@@ -149,8 +160,6 @@
 .circle-plus-mess {
     background-color: rgb(97, 97, 247);
     color: white;
-    width: 25px;
-    height: 25px;
     border-radius: 45%;
 }
 
@@ -229,21 +238,10 @@
     margin-bottom: 100px;
 }
 
-.header {
-    transition: all 0.5s;
-    z-index: 997;
-    height: 50px;
-    box-shadow: 0px 2px 20px rgb(1 41 112 / 10%);
-    background-color: #fff;
-    padding-left: 20px;
-}
-
 .header-bottom {
-    transition: all 0.5s;
     z-index: 997;
-    box-shadow: 0px 2px 20px rgb(1 41 112 / 10%);
-    background-color: #fff;
-    padding-left: 20px;
+    box-shadow: 0px 2px 20px rgb(1 41 112 / 5%);
+    background-color: rgb(252, 252, 252);
 }
 
 .cart-menu-active {
@@ -306,7 +304,16 @@
 }
 
 .time-small {
-    font-size: 14px;
+    font-size: 12px;    
+}
+
+.time-small-find {
+    font-size: 12px;
+}
+
+.text-custom {
+    position: relative;
+    bottom: 3px;
 }
 
 .bg-dark-blue {
@@ -338,3 +345,62 @@
     border-radius: 10px;
 }
 
+.bg-collapse-none {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.icon {
+    display: inline-block;
+    transition: 0.5s;
+}
+.down-animation {
+    transition: 0.5s;
+    transform: rotate(180deg);
+}
+
+.modal-backdrop.show {
+    opacity: .4;
+}
+
+.text-transparent-white {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.text-transparent-black {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.chats-avatar {
+    width: 50px;
+}
+
+.read {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    background-color: #88a0ce;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+.news_mess {
+    background-color: #88a0ce;
+    color: white;
+    font-size: 12px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    border-radius: 7px;
+}
+
+.fixed-exit {
+    position: fixed;
+    top: 70px;
+    left: 0px;
+    background-color: #88a0ce;
+    color: white;
+    width: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}

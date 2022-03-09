@@ -14,11 +14,15 @@
                         <div class="col d-flex mt-3 pe-0">
                             <a href="/other_profile/{{$all->id}}" class="text-decoration-none w-100">
                                 @if($user_details->where('user_id', $all->id)->count() != 0)
-                                    <img class="chats-avatar rounded-pill" src="/storage/avatar/{{$all->id}}/{{$user = $user_details->where('user_id', $all->id)->first()->avatar}}" alt="...">
+                                    @if($user_details->where('user_id', $all->id)->first()->avatar != 'default.png')
+                                        <img class="chats-avatar rounded-pill" src="/storage/avatar/{{$all->id}}/{{$user = $user_details->where('user_id', $all->id)->first()->avatar}}" alt="...">
+                                    @else
+                                        <img class="chats-avatar rounded-pill" src="/img/default.png" alt="...">
+                                    @endif
                                 @else
-                                    <img class="chats-avatar rounded-pill" src="https://static.tildacdn.com/tild6361-3034-4333-b833-353964363837/pngwingcom_2.png" alt="...">
+                                    <img class="chats-avatar rounded-pill" src="/img/default.png" alt="...">
                                 @endif
-                                @if($all->name == '')
+                                @if($all->name == "")
                                     <span class="text-dark-blue fs-name ms-3 mt-2">{{$all->tel}}</span>
                                 @else
                                     <span class="text-dark-blue fs-name ms-3 mt-2">{{$all->surname}} {{$all->name}}</span>

@@ -21,7 +21,7 @@
         <span class="mb-2 text-muted">В последующем вы сможете изменить эти данные</span>
 
         <div class="form-floating mb-2 mt-1">
-            <input type="tel" name="name" class="form-control" id="floatingInput" placeholder="Имя">
+            <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Имя">
             <label for="floatingInput">Имя</label>
             @if($errors -> has('name')) 
                 <div class="text-danger">{{$errors -> first('name')}}</div>

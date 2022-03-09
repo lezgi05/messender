@@ -20,6 +20,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('day');
             $table->string('mounth');
             $table->string('year');
+            $table->string('city');
             $table->string('gender');
             $table->timestamps();
         });

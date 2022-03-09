@@ -14,17 +14,17 @@
 </head>
 <body>
 
-    <header class="d-flex header-bottom justify-content-evenly fixed-bottom bg-white py-4">
-        <a href="/home" class="px-2"><i id="home" class="bi bi-chat-left text-muted fs-5"></i></a>
-        <a href="/friends" class="px-2"><i id="friends" class="bi bi-people text-muted fs-5"></i></a>
-        <a href="/profile" class="px-2"><i id="profile" class="bi bi-person text-muted fs-5"></i></a>
+    <header class="d-flex header-bottom justify-content-evenly fixed-bottom py-3">
+        <a href="/home" class="px-2"><i id="home" class="bi bi-chat-left text-muted fs-4"></i></a>
+        <a href="/friends" class="px-2"><i id="friends" class="bi bi-people text-muted fs-4"></i></a>
+        <a href="/profile" class="px-2"><i id="profile" class="bi bi-person text-muted fs-4"></i></a>
     </header>
 
     @yield('main')    
 
     <!-- Начало меню -->
-    <div class="offcanvas offcanvas-start mt-main w-75" data-bs-scroll="false" data-bs-backdrop="true" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-        <div class="offcanvas-body pb-0 px-0">
+    <div class="offcanvas offcanvas-start w-75" data-bs-scroll="false" data-bs-backdrop="true" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-body bg-light-blue pb-0 px-0">
             <div class="d-flex flex-column h-100">
                 <div class="px-3">
                     <div class="row row-cols-1">

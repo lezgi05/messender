@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/friends', [MainController::class, 'friends'])->name('friends');
     Route::get('/chat/{id}', [MainController::class, 'chat'])->name('chat');
     Route::get('/search_friends', [MainController::class, 'search_friends'])->name('search_friends');
-    Route::post('/message', [MainController::class, 'message']);
+    Route::post('/message/{id}', [MainController::class, 'message']);
     Route::post('/friends/{id}', [MainController::class, 'new_friends']);
     Route::post('/friends_profile/{id}', [MainController::class, 'new_friends_profile']);
     Route::get('/settings', [MainController::class, 'settings']);
@@ -30,9 +30,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/exit_personal', [AuthController::class, 'exit_personal']);
     Route::post('/main_exit_personal/{id}', [AuthController::class, 'main_exit_personal']);
     Route::post('/avatar_exit_personal/{id}', [AuthController::class, 'avatar_exit_personal']);
-    Route::get('/message/{id}', [MainController::class, 'chat_message']);
+    Route::get('/message/{id}', [MainController::class, 'chat_message'])->name('chat_message');
     Route::get('/other_profile/{id}', [MainController::class, 'other_profile'])->name('other_profile');
     Route::post('/delete_friends/{id}', [MainController::class, 'delete_friends']);
+    Route::get('/delete_avatar', [AuthController::class, 'delete_avatar']);
+    Route::get('/exit_mess/{id}/{exit_mess}', [MainController::class, 'exit_mess'])->name('exit_mess');
+    Route::post('/exit_mess/{id}/{exit_mess}', [MainController::class, 'exit_mess_post']);
+    Route::get('/delete_mess/{users}/{id}', [MainController::class, 'delete_mess']);
 });
 
 Route::get('/', [AuthController::class, 'sign_in'])->name('login');

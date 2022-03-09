@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->string('sender');
             $table->string('location');
             $table->string('text');
+            $table->string('read');
             $table->timestamps();
         });
     }

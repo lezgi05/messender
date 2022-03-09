@@ -1,9 +1,9 @@
 @extends('layout')
 @section('main')
-<header class="header fixed-top d-flex align-items-center px-1" style="z-index: 1041;">
-    <button class="btn btn-none me-auto" id="menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i id="close_menu" class="bi bi-list fs-5 text-dark-blue"></i></button>
-    <a href="/home" class="me-auto my-auto text-decoration-none text-dark-blue"><h1 class="text-home my-auto">Messenger</h1></a>
-    <a href="#" class="btn btn-none"><i class="bi bi-search text-dark-blue"></i></a>
+<header class="fixed-top bg-light-blue d-flex align-items-center px-1">
+    <button class="btn btn-none me-auto" id="menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i id="close_menu" class="bi bi-list fs-1 text-dark-blue"></i></button>
+    <a href="/home" class="me-auto my-auto text-decoration-none text-dark-blue"><h1 class="mb-0" style="font-weight: 600;">Messenger</h1></a>
+    <a href="#" class="btn btn-none"><i class="bi bi-search text-dark-blue fs-4"></i></a>
 </header>
 <div class="container px-0 bg-light-blue main-position">
     <div class="main-scroll px-4 pt-1 pb-4">
@@ -23,46 +23,68 @@
                                 @if($mess->id == $message->where('location', $all->id)->latest()->first()->id)
                                     <a href="/chat/{{$user->id}}" class="col d-flex mt-4 text-decoration-none">
                                         @if($user_details->where('user_id', $user->id)->count() != 0)
-                                            <img class="chats-avatar rounded-pill" src="/storage/avatar/{{$user->id}}/{{$users_detailed = $user_details->where('user_id', $user->id)->first()->avatar}}" alt="...">
+                                            @if($user_details->where('user_id', $user->id)->first()->avatar != 'default.png')
+                                                <img class="chats-avatar rounded-pill" src="/storage/avatar/{{$user->id}}/{{$users_detailed = $user_details->where('user_id', $user->id)->first()->avatar}}" alt="...">
+                                            @else
+                                                <img class="chats-avatar rounded-pill" src="/img/default.png" alt="...">
+                                            @endif
                                         @else
-                                            <img class="chats-avatar rounded-pill" src="https://static.tildacdn.com/tild6361-3034-4333-b833-353964363837/pngwingcom_2.png" alt="...">
+                                            <img class="chats-avatar rounded-pill" src="/img/default.png" alt="...">
                                         @endif
-                                        <div class="d-flex flex-column w-100">
-                                            <div class="d-flex ms-online">
-                                                <div class="d-flex flex-column w-name">
-                                                    @if($user->name == '')
-                                                        <span class="text-dark-blue fs-name me-auto">{{$user->tel}}</span>
-                                                    @else
-                                                        <span class="text-dark-blue fs-name me-auto">{{$user->surname}} {{$user->name}}</span>
-                                                    @endif  
-                                                    @if($message->where('location', $all->id)->latest()->first()->sender == auth()->user()->id)       
-                                                        <div class="d-flex">
-                                                            <span class="small me-1 text-muted opacity-75">Вы:</span><span class="text-muted small">{{$message->where('location', $all->id)->latest()->first()->text}}</span>
-                                                        </div>
-                                                    @else
-                                                        <span class="text-muted small">{{$message->where('location', $all->id)->latest()->first()->text}}</span>
-                                                    @endif
-                                                </div>
-                                                <div class="d-flex flex-column ms-auto w-time">
-                                                    <span class="text-muted small mx-auto">
-                                                        @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 7) == date('Y-m'))
-                                                            @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 10) == date('Y-m-d'))
-                                                                @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 10, 3) == date('H'))
-                                                                    @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 14, 2) == date('i'))
-                                                                    @else
-                                                                        {{date('i')-substr($message->where('location', $all->id)->latest()->first()->created_at, 14, 2)}} м
-                                                                    @endif
+                                    @if($user->isOnline())
+                                        <div class="online bg-light-blue rounded-pill">
+                                            <span class="online-item rounded-pill"></span>
+                                        </div>
+                                        <div class="d-flex ms-1 flex-column w-name">
+                                    @else
+                                        <div class="d-flex ms-online flex-column w-name">
+                                    @endif
+                                            <div class="d-flex">
+                                                @if($user->name == '')
+                                                    <span class="text-dark-blue fs-name me-auto">{{$user->tel}}</span>
+                                                @else
+                                                    <span class="text-dark-blue fs-name me-auto">{{$user->surname}} {{$user->name}}</span>
+                                                @endif  
+                                                <span class="text-muted small ms-auto">
+                                                    @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 7) == date('Y-m'))
+                                                        @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 10) == date('Y-m-d'))
+                                                            @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 10, 3) == date('H'))
+                                                                @if(substr($message->where('location', $all->id)->latest()->first()->created_at, 14, 2) == date('i'))
                                                                 @else
-                                                                    {{date('H')-substr($message->where('location', $all->id)->latest()->first()->created_at, 10, 3)}} ч
+                                                                    {{date('i')-substr($message->where('location', $all->id)->latest()->first()->created_at, 14, 2)}} м
                                                                 @endif
                                                             @else
-                                                                {{date('d')-substr($message->where('location', $all->id)->latest()->first()->created_at, 8, 2)}} д
+                                                                {{date('H')-substr($message->where('location', $all->id)->latest()->first()->created_at, 10, 3)}} ч
                                                             @endif
                                                         @else
-                                                            {{date('m')-substr($message->where('location', $all->id)->latest()->first()->created_at, 5, 2)}}
+                                                            {{date('d')-substr($message->where('location', $all->id)->latest()->first()->created_at, 8, 2)}} д
                                                         @endif
-                                                    </span>
-                                                </div>
+                                                    @elseif(substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 4) == date('Y') && substr($message->where('location', $all->id)->latest()->first()->created_at, 5, 2) == date('m')-1)
+                                                        @if(date('t', mktime (0, 0, 0, substr($message->where('location', $all->id)->latest()->first()->created_at, 5, 2), 1, substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 4)))-substr($message->where('location', $all->id)->latest()->first()->created_at, 8, 2)+date('d')  <= date('t'))
+                                                            {{date('t', mktime (0, 0, 0, substr($message->where('location', $all->id)->latest()->first()->created_at, 5, 2), 1, substr($message->where('location', $all->id)->latest()->first()->created_at, 0, 4)))-substr($message->where('location', $all->id)->latest()->first()->created_at, 8, 2)+date('d')}} д
+                                                        @endif
+                                                    @endif
+                                                </span>
+                                            </div>
+                                            <div class="d-flex">
+                                                @if($message->where('location', $all->id)->latest()->first()->sender == auth()->user()->id)       
+                                                    <div class="d-flex">
+                                                        <span class="small me-1 text-muted opacity-75">Вы:</span><span class="text-muted small d-inline-block text-truncate" style="max-width: 55vw;">{{$message->where('location', $all->id)->latest()->first()->text}}</span>
+                                                    </div>
+                                                @else
+                                                    <span class="text-muted small d-inline-block text-truncate" style="max-width: 45vw;">{{$message->where('location', $all->id)->latest()->first()->text}}</span>
+                                                @endif
+                                                @if($message->where('location', $all->id)->latest()->first()->read == false)  
+                                                    @if($message->where([['location', $all->id]])->latest()->first()->sender == auth()->user()->id)
+                                                        <div class="ms-auto">
+                                                            <span class="read"></span>
+                                                        </div>
+                                                    @elseif($message->where([['location', $all->id]])->latest()->first()->sender == $user->id)
+                                                        <div class="ms-auto">
+                                                            <span class="news_mess">{{$message->where([['location', $all->id], ['read', false]])->count()}}</span>
+                                                        </div>
+                                                    @endif
+                                                @endif
                                             </div>
                                         </div>
                                     </a>
